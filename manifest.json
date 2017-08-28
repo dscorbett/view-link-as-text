@@ -1,0 +1,17 @@
+{
+    "manifest_version": 2,
+    "name": "View Link as Text",
+    "description": "View links as if their Content-Type was text/plain",
+    "version": "1.0.0",
+    "author": "David Corbett",
+    "homepage_url": "https://github.com/dscorbett/view-link-as-text",
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "permissions": [
+        "<all_urls>",
+        "contextMenus",
+        "webRequest",
+        "webRequestBlocking"
+    ]
+}
