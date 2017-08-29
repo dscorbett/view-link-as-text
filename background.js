@@ -23,7 +23,7 @@ let url = undefined
 
 browser.contextMenus.onClicked.addListener((info, tab) => {
         url = info.linkUrl
-        chrome.tabs.create({"url": info.linkUrl}).resolve()
+        browser.tabs.create({'url': info.linkUrl})
     })
 
 browser.webRequest.onHeadersReceived.addListener(details => {
