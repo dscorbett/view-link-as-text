@@ -23,7 +23,21 @@ let url = undefined
 
 browser.contextMenus.onClicked.addListener((info, tab) => {
         url = info.linkUrl
-        browser.tabs.create({'url': info.linkUrl})
+        if ('browsingData' in browser) {
+            // If the page is cached, fetching it might return HTTP 304
+            // Not Modified, in which case rewriting the Content-Type is
+            // ineffective, so clear the cache first.
+            browser.browsingData.removeCache({}).then(() =>
+            browser.tabs.create({url}))
+        } else {
+            // If this is an old version of Firefox without the
+            // browsingData API, add a random dummy parameter to make
+            // sure the page will never have been visited before.
+            url = new URL(url)
+            url.searchParams.append('vlat' + Math.random(), 1)
+            url = url.href
+            browser.tabs.create({url})
+        }
     })
 
 browser.webRequest.onHeadersReceived.addListener(details => {

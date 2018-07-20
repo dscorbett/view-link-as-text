@@ -10,6 +10,7 @@
     },
     "permissions": [
         "<all_urls>",
+        "browsingData",
         "contextMenus",
         "webRequest",
         "webRequestBlocking"
